@@ -6,7 +6,7 @@ const login = async (req, res) => {
       .status(400)
       .json({ message: "Please provide email and password" });
   }
-  console.log(req.body);
+
   const { email, password } = req.body;
   const { db } = req.app;
 
