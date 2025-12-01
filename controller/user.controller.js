@@ -2,9 +2,11 @@ const { UserService } = require("../services/user.serivce");
 
 const login = async (req, res) => {
   if (!req?.body?.email || !req?.body?.password) {
-    return res.status(400).json({ message: "Please provide email and password" });
+    return res
+      .status(400)
+      .json({ message: "Please provide email and password" });
   }
-
+  console.log(req.body);
   const { email, password } = req.body;
   const { db } = req.app;
 
@@ -14,7 +16,12 @@ const login = async (req, res) => {
 };
 
 const register = (req, res) => {
-  if (!req?.body?.email || !req?.body?.password || !req?.body?.firstName || !req?.body?.lastName) {
+  if (
+    !req?.body?.email ||
+    !req?.body?.password ||
+    !req?.body?.firstName ||
+    !req?.body?.lastName
+  ) {
     return res.status(400).json({
       message: "Please provide email, password, firstName and lastName",
     });

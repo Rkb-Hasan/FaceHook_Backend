@@ -675,6 +675,14 @@
       "avatar": "uploads/avatar/avatar-1764582816342-18493624.png",
       "email": "test@test.com",
       "bio": "Hiii"
+    },
+    {
+      "id": "2759f48e-2b8a-4489-903b-1b0c29c287d0",
+      "password": "$2b$08$EMg5IHMNSbvOmG8r153zZeCSaSMylh.ObgxfTvB3zwbF4kdsMNOiC",
+      "firstName": "Aas",
+      "lastName": "asdsa",
+      "avatar": null,
+      "email": "me@mail.com"
     }
   ]
 }
