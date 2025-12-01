@@ -8,33 +8,44 @@ const cors = require("cors");
 const app = jsonServer.create();
 const router = jsonServer.router("./database/db.json");
 
-app.use(cors({ credentials: true, origin: true }));
+// CORS
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://facehook-mocha.vercel.app"],
+    credentials: true,
+  })
+);
+
+// Needed for Renderer/Railway
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
+// Static Files
 app.use(express.static(__dirname + "/public"));
 app.use("/uploads", express.static("uploads"));
 
-// /!\ Bind the router db to the app
+// Bind DB
 app.db = router.db;
 
 app.use(express.json());
 
-// This middleware will add extra information before storing
+// Auth Middleware
 app.use(checkAuth);
 
-// CustomRoute Middleware to Handle Extra Routes
+// Custom Routes
 app.use("/", customRouter);
 
+// Default JSON Server routes
 app.use(router);
 
-// Error handle Middleware
-// eslint-disable-next-line no-unused-vars
+// Error handler
 app.use((err, req, res, _next) => {
-  res.status(500).json({
-    error: err.message,
-  });
+  res.status(500).json({ error: err.message });
 });
 
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
   console.log("Listening on port " + PORT);
 });
